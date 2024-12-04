@@ -1,46 +1,35 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include <fstream>
-#include <sstream>
-
-using namespace std;
+#include <vector>
+#include <string>
 
 int main() {
-    ifstream inputFile("input.txt"); 
-    if (!inputFile) { 
-        cerr << "Error opening file!" << endl;
-        return 1; 
-    }
-
-    string inp;
-    vector<int> a;
-    vector<int> b;
-
-   
-    while (getline(inputFile, inp)) {
-        istringstream stream(inp);
-        int num;
-        bool is_a = true;  
-        while (stream >> num) {
-            if (is_a)
-                a.push_back(num);
-            else
-                b.push_back(num);
-
-            is_a = !is_a;  
-        }
-    }
-
+    // Vector to store each line of the file
+    std::vector<std::string> lines;
     
-    inputFile.close();
-
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-
-    long long count = 0;
-    for (size_t i = 0; i < a.size(); ++i) {
-        count += abs(a[i] - b[i]);
+    // Open the file
+    std::ifstream inputFile("input.txt");
+    
+    // Check if the file is open
+    if (!inputFile.is_open()) {
+        std::cerr << "Could not open the file!" << std::endl;
+        return 1;
     }
-
-    cout << count << endl;
+    
+    std::string line;
+    // Read each line from the file and push it into the vector
+    while (std::getline(inputFile, line)) {
+        lines.push_back(line);
+    }
+    
+    // Close the file
+    inputFile.close();
+    
+    // Output the vector contents
+    std::cout << "Contents of the file stored in the vector: \n";
+    for (const auto& str : lines) {
+        std::cout << str << std::endl;
+    }
+    
     return 0;
 }
